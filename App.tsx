@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
+import React from 'react';
+import { StatusBar } from 'react-native';
+import { store } from './src/store';
+import { Provider } from 'react-redux';
+import { ToastProvider } from 'react-native-toast-notifications'
+import RootNavigation from './src/navigation';
+export default function App(): React.JSX.Element{
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <Provider store={store}>
+      <StatusBar />
+      <ToastProvider>
+        <RootNavigation />
+      </ToastProvider>
+    </Provider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
