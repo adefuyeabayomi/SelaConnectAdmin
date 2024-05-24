@@ -8,34 +8,59 @@ import { paddings } from "../../styles/spacing";
 import { efficiency } from "../../styles/colordef";
 import { layoutVals } from "../../styles/layout";
 
-export function Comp1(): React.JSX.Element {
-    return (
-        <View></View>
-    )
+interface MBItemPropTypes {
+    field: string;
+    value: string;
 }
 
-export function MBDataItem1({field,value}): React.JSX.Element {
+export function MBDataItem1({field,value}: MBItemPropTypes): React.JSX.Element {
     return (
         <View style={[layoutVals.flexRow,paddings.p5,paddings.ph10,borderStyles.r10]}>
             <View style={[layoutVals.flex0]}>
-                <Text style={[smallStyles.small_bold,{color: efficiency.efficiencyShade4}]}>{field}</Text>
+                <Text style={[paraStyles.para_bold,{color: efficiency.efficiencyShade4}]}>{field}</Text>
             </View>
             <View style={[layoutVals.flex1]} />
             <View style={[layoutVals.flex0]}>
-                <Text style={[smallStyles.small_regular,{color: efficiency.efficiencyShade4}]}>{value}</Text>
+                <Text style={[paraStyles.para_regular,{color: efficiency.efficiencyShade4}]}>{value}</Text>
             </View>
         </View>
     )
 }
-export function MBDataItem2({field,value}): React.JSX.Element {
+export function MBDataItem2({field,value}:MBItemPropTypes): React.JSX.Element {
     return (
         <View style={[layoutVals.flexRow,paddings.p5,paddings.ph10,borderStyles.r10,borderStyles.bWidth2]}>
             <View style={[layoutVals.flex0]}>
-                <Text style={[smallStyles.small_bold,{color: efficiency.efficiencyShade4}]}>{field}</Text>
+                <Text style={[paraStyles.para_regular,{color: efficiency.efficiencyShade4}]}>{field}</Text>
             </View>
             <View style={[layoutVals.flex1]} />
             <View style={[layoutVals.flex0]}>
-                <Text style={[smallStyles.small_medium,{color: efficiency.efficiencyShade4}]}>{value}</Text>
+                <Text style={[paraStyles.para_bold,{color: efficiency.efficiencyShade4}]}>{value}</Text>
+            </View>
+        </View>
+    )
+}
+export function MBDataItem3({field,value}: MBItemPropTypes): React.JSX.Element {
+    return (
+        <View style={[layoutVals.flexRow,paddings.p5,paddings.ph10,borderStyles.r10,borderStyles.bWidth2]}>
+            <View style={[layoutVals.flex0]}>
+                <Text style={[paraStyles.para_regular,{color: efficiency.efficiencyShade4}]}>{field}</Text>
+            </View>
+            <View style={[layoutVals.flex1]} />
+            <View style={[layoutVals.flex0]}>
+                <Text style={[paraStyles.para_regular,{color: efficiency.efficiencyShade4}]}>{value}</Text>
+            </View>
+        </View>
+    )
+}
+export function MBDataItem4({field,value}: MBItemPropTypes): React.JSX.Element {
+    return (
+        <View style={[layoutVals.flexRow,paddings.p5,paddings.ph10,borderStyles.r10,borderStyles.bWidth2]}>
+            <View style={[layoutVals.flex0]}>
+                <Text style={[paraStyles.para_bold,{color: efficiency.efficiencyShade4}]}>{field}</Text>
+            </View>
+            <View style={[layoutVals.flex1]} />
+            <View style={[layoutVals.flex0]}>
+                <Text style={[paraStyles.para_bold,{color: efficiency.efficiencyShade4}]}>{value}</Text>
             </View>
         </View>
     )
@@ -112,6 +137,24 @@ export function UpdatesAndChanges({children = <Text></Text>}): React.JSX.Element
         <View style={[styles.BSContainer,borderStyles.r15,paddings.p15]}>
             <View>
                 <Text style={[centerText.center,h6Styles.h6_bold,{color: efficiency.efficiencyShade5}]}>Updates and Changes</Text>
+            </View>
+            <View style={[paddings.pt10]}>
+                <View>
+                    {children}
+                </View>
+            </View>
+        </View>
+    )
+}
+interface DataSummaryMainPropType {
+    title: string;
+    children: React.JSX.Element | Array<React.JSX.Element>
+}
+export function DataSummaryMain({children = <Text></Text>,title=''}: DataSummaryMainPropType): React.JSX.Element {
+    return (
+        <View style={[styles.BSContainer,borderStyles.r15,paddings.p15]}>
+            <View>
+                <Text style={[centerText.center,h6Styles.h6_bold,{color: efficiency.efficiencyShade5}]}>{title}</Text>
             </View>
             <View style={[paddings.pt10]}>
                 <View>

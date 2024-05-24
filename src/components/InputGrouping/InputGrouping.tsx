@@ -1,13 +1,18 @@
 import React from 'react'
 import { Text, SafeAreaView,View, ScrollView } from 'react-native'
-import SCInput from '../input/input'
 
 import styles from './styles'
-import { InputStateType } from '../../types/navTypes'
 import { centerText, h6Styles } from '../../styles/textstyles'
 import { efficiency } from '../../styles/colordef'
 
-function InputGrouping({headText,containerStyle={},headContainerStyle={},headTextStyle={}, children}) : React.JSX.Element {
+interface InputGroupingPropTypes {
+    headText: string;
+    containerStyle?: object;
+    headContainerStyle?: object;
+    headTextStyle?: object;
+    children: Array<React.JSX.Element> | React.JSX.Element
+}
+function InputGrouping({headText,containerStyle={},headContainerStyle={},headTextStyle={}, children}: InputGroupingPropTypes) : React.JSX.Element {
     return (
         <View style={[styles.inputContainer,containerStyle]}>
             <View style={[styles.headContainer,headContainerStyle]}><Text style={[h6Styles.h6_bold, centerText.center, {color: efficiency.efficiencyShade4},headTextStyle]}>{headText}</Text></View>
@@ -16,6 +21,6 @@ function InputGrouping({headText,containerStyle={},headContainerStyle={},headTex
             </View>
         </View>
     )
-} 
+}
 
 export default InputGrouping

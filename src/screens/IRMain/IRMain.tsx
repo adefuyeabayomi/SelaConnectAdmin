@@ -4,11 +4,11 @@ import { RootStackParamList } from "../../types/navTypes";
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { AbsNav,AbsHeader } from "../../components/absComp/Abs";
 import PageHeadInfo from "../../components/PageHeadInfo/PageHeadInfo";
-type ScreenProps = NativeStackScreenProps<RootStackParamList,'Ref'>
+type ScreenProps = NativeStackScreenProps<RootStackParamList,'IRMain'>
 
 import styles from './style'
 
-export default function Ref ({navigation}: ScreenProps): React.JSX.Element{
+export default function IRMain ({navigation}: ScreenProps): React.JSX.Element{
     function goToPending(){
         navigation.navigate('PendingDeliveries')
     }
@@ -35,11 +35,11 @@ export default function Ref ({navigation}: ScreenProps): React.JSX.Element{
     return (
         <SafeAreaView style={styles.safeAreaView}>
            
-            <AbsHeader backFn={goBack} headerVal={'Manage Riders'} />
+            <AbsHeader backFn={goBack} headerVal={'Invoices and Reciepts Records'} />
             <AbsNav location="" goToHome={goToHome} goToNotifications={goToNotifications} goToSupport={goToSupport} goToRecords={goToBookingRecords} goToPending={goToPending}></AbsNav>
-            
+
             <ScrollView>
-                <PageHeadInfo pageName={'Manage Riders'}/>         
+                <PageHeadInfo pageName={'Invoices and Reciepts'}/>                
             </ScrollView>
         </SafeAreaView>
     )

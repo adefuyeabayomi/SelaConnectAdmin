@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
 import { SCButtonOutlineColorVary, SCDesignSmall, SCTransFill, SCTransOutline } from '../button/button'
-import SCInput from '../input/input'
+
 import styles from './style'
 import { paraStyles, smallStyles } from '../../styles/textstyles'
 import { efficiency, gold, utilityColors } from '../../styles/colordef'
@@ -11,13 +11,22 @@ import { borderStyles } from '../../styles/borders'
 import { boxWidth } from '../../styles/width'
 import { FontAwesome5 } from '@expo/vector-icons';
 let penIcon = <FontAwesome5 name="pen-alt" size={24} color={efficiency.efficiencyTint1} />
-import { CSTypes,notificationTypes } from '../../types/navTypes'
+
 import { nStyles } from './style'
 import { ParaBold, ParaRegular } from '../TextComp/TextComp'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { FlexRow, Flex0, Flex1 } from '../LayoutComp/LayoutComp'
 
-export function Item1({buttonText,imageComponent,buttonColor, title, body, actionFn}) : React.JSX.Element {
+
+interface Item1PropType {
+    buttonText: string;
+    imageComponent: React.JSX.Element;
+    buttonColor?: string;
+    title: string;
+    body: string;
+    actionFn: ()=>void;
+}
+export function Item1({buttonText,imageComponent,buttonColor, title, body, actionFn}: Item1PropType) : React.JSX.Element {
     return (
         <View style={[styles.itemContainer,{borderColor: buttonColor}]}>
             <View style={styles.imageContainer}>
@@ -34,7 +43,7 @@ export function Item1({buttonText,imageComponent,buttonColor, title, body, actio
     )
 } 
 
-export function Item2({imageComponent, title, body, buttonText, actionFn}) : React.JSX.Element {
+export function Item2({imageComponent, title, body, buttonText, actionFn}: Item1PropType) : React.JSX.Element {
     return (
         <View>
             <View style={styles.item2ImageContainer} id='imageContainer'>
@@ -47,13 +56,22 @@ export function Item2({imageComponent, title, body, buttonText, actionFn}) : Rea
                 </View>
             </View>
             <View style={[styles.offsetTop5]} id='buttonContainer'>
-                <SCDesignSmall buttonStyle={{borderColor: efficiency.efficiencyTint3,backgroundColor: efficiency.efficiencyTint2}} onPress={actionFn}> {buttonText}</SCDesignSmall>
+                <SCDesignSmall buttonStyle={{borderColor: efficiency.efficiencyTint3,backgroundColor: efficiency.efficiencyTint2}} onPress={actionFn}>{buttonText}</SCDesignSmall>
             </View>
         </View>
     )
 }
+
+interface BookingItemPropTypes {
+    title: string;
+    price: string;
+    tag1: string;
+    tag2: string;
+    paid: boolean;
+    actionFn: ()=>void;
+}
 let bookingItemImageComponent =  <Image style={styles.BIImage} source={require('../../assets/images/bookingItem.png')} />
-export function BookingItem({title,price,tag1,tag2,paid,actionFn}): React.JSX.Element {
+export function BookingItem({title,price,tag1,tag2,paid,actionFn}: BookingItemPropTypes): React.JSX.Element {
     let paidIndicator = paid?  <Text style={{color: utilityColors.infoDeep}}>Paid</Text> : <Text style={{color: utilityColors.errorDeep}}>Not Paid</Text>
     return (
         <View style={[styles.BIContainer,layoutVals.flexRow,layoutVals.alignCenter,layoutVals.justifyCenter,borderStyles.bWidth2,paddings.p10,borderStyles.r15,{borderColor: efficiency.efficiencyTint5}]}>
@@ -84,8 +102,16 @@ export function BookingItem({title,price,tag1,tag2,paid,actionFn}): React.JSX.El
     ) 
 }
 
+
+interface TrackingItemPropTypes {
+    title: string;
+    tag1: string;
+    tag2: string;
+    actionFn: ()=>void;
+}
+
 let trackingItemImageComponent =  <Image style={styles.TIImage} source={require('../../assets/images/trackingItem.png')} />
-export function TrackingItem({title,tag1,tag2,actionFn}): React.JSX.Element {
+export function TrackingItem({title,tag1,tag2,actionFn}: TrackingItemPropTypes ): React.JSX.Element {
    
     return (
         <View style={[styles.BIContainer,layoutVals.flexRow,layoutVals.alignCenter,layoutVals.justifyCenter,borderStyles.bWidth2,paddings.p10,borderStyles.r15,{borderColor: efficiency.efficiencyTint5}]}>
@@ -114,10 +140,14 @@ export function TrackingItem({title,tag1,tag2,actionFn}): React.JSX.Element {
     ) 
 }
 
+interface HistoryItemPropType {
+    title: string;
+    actionFn: ()=> void;
+}
 
 let historyItemImageComponent =  <Image style={styles.HIImage} source={require('../../assets/images/transactionItem.png')} />
 
-export function HistoryItem({title, actionFn}): React.JSX.Element{
+export function HistoryItem({title, actionFn}: HistoryItemPropType): React.JSX.Element{
     return (
         <View style={[borderStyles.r15,borderStyles.bWidth2,{borderColor: efficiency.efficiencyTint5},paddings.p20]}>
             <View style={[layoutVals.flexRow,layoutVals.alignCenter,layoutVals.justifyCenter]}>
@@ -139,6 +169,13 @@ export function HistoryItem({title, actionFn}): React.JSX.Element{
     )
 }
 
+
+
+interface CSItemPropType {
+    type: 'whatsapp' | 'inApp' | 'call',
+    text: string
+}
+
 let whatsapp = <Image style={styles.CSImage} source={require('../../assets/images/cs-whatsapp.png')} />
 let inApp = <Image style={styles.CSImage} source={require('../../assets/images/cs-inapp.png')} />
 let call = <Image style={styles.CSImage} source={require('../../assets/images/cs-call.png')} />
@@ -149,7 +186,7 @@ let imgObj = {
     call
 }
 
-export function CSItem({type,text}): React.JSX.Element{
+export function CSItem({type,text}: CSItemPropType): React.JSX.Element{
     let image = imgObj[type]
     return (
         <View>
@@ -162,12 +199,16 @@ export function CSItem({type,text}): React.JSX.Element{
     )
 }
 
+interface NotificationItemPropType {
+    type: 'bookingSuccess',
+    text: string
+}
+
 let notifImages = {
     bookingSuccess: <Image style={[styles.NIImage]} source={require('../../assets/images/n-booking-success.png')} />
 }
 
-
-export function NotificationItem({type,text}): React.JSX.Element{
+export function NotificationItem({type,text} : NotificationItemPropType): React.JSX.Element{
     let image = notifImages[type]
     return (
     <View style={[layoutVals.flexRow]}>
@@ -178,7 +219,11 @@ export function NotificationItem({type,text}): React.JSX.Element{
     )
 }
 
-export function UserMessageItem({children}): React.JSX.Element{
+interface UserMessageItemPropType {
+    children: React.JSX.Element | string,
+    actionFn? : ()=>void
+}
+export function UserMessageItem({children}: UserMessageItemPropType): React.JSX.Element{
         return (
             <View style={[layoutVals.flexRow,{justifyContent:  "flex-end"}]}>
                 <View style={[borderStyles.r10,paddings.p15,boxWidth.wp70,{backgroundColor: efficiency.efficiencyTint2}]}>
@@ -188,7 +233,7 @@ export function UserMessageItem({children}): React.JSX.Element{
         )
 }
 
-export function AdminMessageItem({children}): React.JSX.Element{
+export function AdminMessageItem({children}: UserMessageItemPropType): React.JSX.Element{
     return (
         <View style={[layoutVals.flexRow]}>
             <View style={[borderStyles.r10,paddings.p15,boxWidth.wp70,{backgroundColor: efficiency.efficiencyMain}]}>
@@ -199,7 +244,7 @@ export function AdminMessageItem({children}): React.JSX.Element{
 }
 
 
-export function AccountItem({actionFn=()=>{},children}): React.JSX.Element{
+export function AccountItem({actionFn=()=>{},children}: UserMessageItemPropType): React.JSX.Element{
     return (
         <View style={[layoutVals.flexRow,layoutVals.alignCenter,paddings.p10,borderStyles.bWidth1,borderStyles.r20,{borderColor: efficiency.efficiencyTint2}]}>
             <View style={[layoutVals.flex1]}>
@@ -215,7 +260,11 @@ export function AccountItem({actionFn=()=>{},children}): React.JSX.Element{
     )
 }
 
-export function RidersBookingItem({tag1,tag2}): React.JSX.Element{
+interface RidersBookingItemProptype {
+    tag1: string,
+    tag2: string
+}
+export function RidersBookingItem({tag1,tag2}: RidersBookingItemProptype): React.JSX.Element{
     return (
         <View style={[borderStyles.bWidth2,borderStyles.r15,{borderColor: efficiency.efficiencyShade4},paddings.p10]}>
             <FlexRow>
@@ -255,8 +304,14 @@ export function RidersBookingItem({tag1,tag2}): React.JSX.Element{
         </View>
     )
 }
-
-export function UpcomingDeliveries({date,amount}): React.JSX.Element{
+interface BookingGroupPropType {
+    date: string;
+    amount: number;
+    actionFn: ()=>void;
+    buttonText: string;
+    detailsText: string;
+}
+export function BookingGroup({date,amount,actionFn,detailsText,buttonText}: BookingGroupPropType): React.JSX.Element{
     return (
         <View>
             <FlexRow>
@@ -270,9 +325,9 @@ export function UpcomingDeliveries({date,amount}): React.JSX.Element{
                     <View style={[borderStyles.bWidth2,borderStyles.r15,{borderColor: gold.goldTint2},paddings.p10]}>
                         <ParaBold><Text>{date} ({amount})</Text></ParaBold>
                         <View style={paddings.pt5} />
-                        <ParaRegular><Text>There are {amount} deliveries for this date.</Text></ParaRegular>
+                        <ParaRegular><Text>{detailsText}</Text></ParaRegular>
                         <View style={paddings.pt10}>
-                            <SCDesignSmall onPress={()=>{}} buttonStyle={{borderRadius: 8}} textStyle={{color: gold.goldShade3} }>View Deliveries</SCDesignSmall>
+                            <SCDesignSmall onPress={actionFn} buttonStyle={{borderRadius: 8}} textStyle={{color: gold.goldShade3} }>{buttonText}</SCDesignSmall>
                         </View>
                     </View>
                 </Flex1>
@@ -280,7 +335,70 @@ export function UpcomingDeliveries({date,amount}): React.JSX.Element{
         </View>
     )
 }
-export function RidersItemComponent({name,employmentHitory}): React.JSX.Element{
+
+interface AdminBookingItemPropType {
+    details: string,
+    goToBookingDetails: ()=>void;
+    assignRiders: ()=>void;
+}
+export function AdminBookingItem({details,goToBookingDetails,assignRiders}:AdminBookingItemPropType): React.JSX.Element{
+   return (
+    <View style={[paddings.p15,borderStyles.r10,borderStyles.bWidth2,{borderColor: utilityColors.info2}]}>
+        <View>
+            <FlexRow alignCenter={true} >
+                <Flex0>
+                    <Image style={{width: 50, height: 50}} source={require('../../assets/images/icon12.png')} />
+                </Flex0>
+                <Flex1 style={{paddingLeft: 10}}>
+                    <ParaBold>{details}</ParaBold>
+                </Flex1>
+            </FlexRow>
+        </View>
+        <View>
+            <View style={[paddings.pt5]}>
+                <Text>
+                    <Text style={paraStyles.para_bold}>Sender: </Text><Text style={paraStyles.para_regular}>Omoyele Ibrahim</Text>
+                </Text>
+            </View>
+            <View style={[paddings.pt5]}>
+                <Text>
+                    <Text style={paraStyles.para_bold}>Reciever: </Text><Text style={paraStyles.para_regular}>Omoyele Ibrahim</Text>                    
+                </Text>
+            </View>
+            <View style={[paddings.pt5]}>
+                <Text>
+                    <Text style={paraStyles.para_bold}>Pickup Address: </Text><Text style={paraStyles.para_regular}>Plot 1, Yaha Ahmed Street, Prince Mark Saffold Plaza, Ikeja, Lagos</Text>                    
+                </Text>
+            </View>
+            <View style={[paddings.pt5]}>
+                <Text>
+                    <Text style={paraStyles.para_bold}>Dropoff Address: </Text><Text style={paraStyles.para_regular}>Plot 1, Yaha Ahmed Street, Dominos Pizza, Ikotun</Text>                    
+                </Text>
+            </View>
+        </View>
+        <View style={[paddings.pt20]}>
+            <FlexRow>
+                <Flex1>
+                    <SCTransFill style={{borderColor: utilityColors.info2,backgroundColor: utilityColors.infoLight}} textStyle={{color: efficiency.efficiencyShade4}} onPress={assignRiders}>Assign Rider</SCTransFill>
+                </Flex1>
+                <View style={boxWidth.w10}/>
+                <Flex1>
+                    <SCTransOutline style={{borderColor: utilityColors.info2}} textStyle={{color: utilityColors.infoDeep}} onPress={goToBookingDetails}>Booking Details</SCTransOutline>
+                </Flex1>
+            </FlexRow>
+        </View>
+    </View>
+   ) 
+}
+
+
+
+interface RidersItemComponentPropType {
+    name: string;
+    employmentHistory: string;
+    actionFn: ()=>void;
+}
+export function RidersItemComponent({name,employmentHistory,actionFn}: RidersItemComponentPropType): React.JSX.Element{
     return (
         <View>
             <FlexRow>
@@ -294,9 +412,9 @@ export function RidersItemComponent({name,employmentHitory}): React.JSX.Element{
                     <View style={[borderStyles.bWidth2,borderStyles.r15,{borderColor: utilityColors.info2},paddings.p10]}>
                         <ParaBold><Text>{name}</Text></ParaBold>
                         <View style={paddings.pt5} />
-                        <ParaRegular><Text>{employmentHitory}</Text></ParaRegular>
+                        <ParaRegular><Text>{employmentHistory}</Text></ParaRegular>
                         <View style={paddings.pt10}>
-                            <SCDesignSmall onPress={()=>{}} buttonStyle={{borderRadius: 8, borderColor: utilityColors.info2, backgroundColor: utilityColors.infoLight}} textStyle={{color: utilityColors.infoDeep} }>View Details</SCDesignSmall>
+                            <SCDesignSmall onPress={actionFn} buttonStyle={{borderRadius: 8, borderColor: utilityColors.info2, backgroundColor: utilityColors.infoLight}} textStyle={{color: utilityColors.infoDeep} }>View Details</SCDesignSmall>
                         </View>
                     </View>
                 </Flex1>
@@ -304,8 +422,7 @@ export function RidersItemComponent({name,employmentHitory}): React.JSX.Element{
         </View>
     )
 }
-
-export function InvoicesDayItem({date,amount,paid,unpaid}): React.JSX.Element{
+export function InvoicesDayItem({date='',amount=0,paid=0,unpaid=0}): React.JSX.Element{
     return (
         <View>
             <FlexRow>
@@ -332,7 +449,7 @@ export function InvoicesDayItem({date,amount,paid,unpaid}): React.JSX.Element{
     )
 }
 
-export function ChatMsgOverview({message,name}): React.JSX.Element{
+export function ChatMsgOverview({message='',name=''}): React.JSX.Element{
     return (
         <View style={[borderStyles.bWidth2,borderStyles.r15,{borderColor: utilityColors.info2},paddings.p10]}>
             <FlexRow>

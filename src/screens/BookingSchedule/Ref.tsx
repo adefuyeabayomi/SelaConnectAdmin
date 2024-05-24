@@ -39,7 +39,8 @@ export default function Ref ({navigation}: ScreenProps): React.JSX.Element{
             <AbsNav location="" goToHome={goToHome} goToNotifications={goToNotifications} goToSupport={goToSupport} goToRecords={goToBookingRecords} goToPending={goToPending}></AbsNav>
             
             <ScrollView>
-                <PageHeadInfo pageName={'Manage Riders'}/>         
+                <PageHeadInfo pageName={'Manage Riders'}/>
+                
             </ScrollView>
         </SafeAreaView>
     )

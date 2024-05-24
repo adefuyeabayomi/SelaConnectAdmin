@@ -1,5 +1,5 @@
 import React, { Children, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, TextStyle,ViewStyle } from "react-native";
 import { centerText, paraStyles, smallStyles } from "../../styles/textstyles";
 import { efficiency,gold, utilityColors } from "../../styles/colordef";
 
@@ -79,101 +79,111 @@ let styles = StyleSheet.create({
     }
 })
 
-    export function SCButton({onPress, children}): React.JSX.Element {
+interface buttonTypeProps {
+    onPress: ()=>void;
+    children: string | React.JSX.Element;
+    borderColor?: string,
+    color?: string,
+    textStyle?: TextStyle,
+    buttonStyle?: object,
+    style?: ViewStyle
+}
+
+    export function SCButton({onPress, children,style,textStyle}: buttonTypeProps): React.JSX.Element {
         return (
             <View>
-                <TouchableOpacity style={styles.button} onPress={onPress}>
-                    <Text style={[paraStyles.para_regular,styles.text]}>{children}</Text>
+                <TouchableOpacity style={[styles.button,style]} onPress={onPress}>
+                    <Text style={[paraStyles.para_regular,styles.text,textStyle]}>{children}</Text>
                 </TouchableOpacity>
             </View>
         )
     }
 
-    export function SCButtonSuccess({onPress, children}): React.JSX.Element {
+    export function SCButtonSuccess({onPress,style,textStyle, children}: buttonTypeProps): React.JSX.Element {
         return (
             <View>
-                <TouchableOpacity style={[styles.button,styles.buttonSuccess]} onPress={onPress}>
-                    <Text style={[paraStyles.para_regular,styles.text,{color: efficiency.efficiencyTint1}]}>{children}</Text>
+                <TouchableOpacity style={[styles.button,styles.buttonSuccess,style]} onPress={onPress}>
+                    <Text style={[paraStyles.para_regular,styles.text,{color: efficiency.efficiencyTint1},textStyle]}>{children}</Text>
                 </TouchableOpacity>
             </View>
         )
     }
 
-    export function SCButtonInfo({onPress, children}): React.JSX.Element {
+    export function SCButtonInfo({onPress,style,textStyle, children}: buttonTypeProps): React.JSX.Element {
         return (
             <View>
-                <TouchableOpacity style={[styles.button,styles.buttonInfo]} onPress={onPress}>
-                    <Text style={[paraStyles.para_regular,styles.text,{color: efficiency.efficiencyTint1}]}>{children}</Text>
+                <TouchableOpacity style={[styles.button,styles.buttonInfo,style]} onPress={onPress}>
+                    <Text style={[paraStyles.para_regular,styles.text,{color: efficiency.efficiencyTint1},textStyle]}>{children}</Text>
                 </TouchableOpacity>
             </View>
         )
     }
 
     
-    export function SCButtonWarning({onPress, children}): React.JSX.Element {
+    export function SCButtonWarning({onPress,style,textStyle, children}: buttonTypeProps): React.JSX.Element {
         return (
             <View>
-                <TouchableOpacity style={[styles.button,styles.buttonWarning]} onPress={onPress}>
-                    <Text style={[paraStyles.para_regular,styles.text,{color: efficiency.efficiencyTint1}]}>{children}</Text>
+                <TouchableOpacity style={[styles.button,styles.buttonWarning,style]} onPress={onPress}>
+                    <Text style={[paraStyles.para_regular,styles.text,{color: efficiency.efficiencyTint1},textStyle]}>{children}</Text>
                 </TouchableOpacity>
             </View>
         )
     }
 
-    export function SCButtonError({onPress, children}): React.JSX.Element {
+    export function SCButtonError({onPress,style,textStyle, children}: buttonTypeProps): React.JSX.Element {
         return (
             <View>
-                <TouchableOpacity style={[styles.button,styles.buttonError]} onPress={onPress}>
-                    <Text style={[paraStyles.para_regular,styles.text,{color: efficiency.efficiencyTint1}]}>{children}</Text>
+                <TouchableOpacity style={[styles.button,styles.buttonError,style]} onPress={onPress}>
+                    <Text style={[paraStyles.para_regular,styles.text,{color: efficiency.efficiencyTint1},textStyle]}>{children}</Text>
                 </TouchableOpacity>
             </View>
         )
     }
 
-    export function SCButtonOutline({onPress, children}): React.JSX.Element {
+    export function SCButtonOutline({onPress,style,textStyle, children}: buttonTypeProps): React.JSX.Element {
         return (
             <View>
-                <TouchableOpacity style={styles.buttonOutline} onPress={onPress}>
-                    <Text style={[paraStyles.para_regular,styles.text]}>{children}</Text>
+                <TouchableOpacity style={[styles.buttonOutline,style]} onPress={onPress}>
+                    <Text style={[paraStyles.para_regular,styles.text,textStyle]}>{children}</Text>
                 </TouchableOpacity>            
             </View>
         )
     }
     
-    export function SCButtonOutlineColorVary({onPress,borderColor,color = efficiency.efficiencyShade4, children }): React.JSX.Element {
+    export function SCButtonOutlineColorVary({onPress,style,textStyle,borderColor,color = efficiency.efficiencyShade4, children}: buttonTypeProps): React.JSX.Element {
         let colorVal = borderColor ? borderColor : efficiency.efficiencyTint4    
         return (
             <View>
-                <TouchableOpacity style={[styles.buttonOutlineNoShadow,{borderColor: colorVal, borderRadius: 10 }]} onPress={onPress}>
-                    <Text style={[smallStyles.small_regular,centerText.center,styles.textSmall,{color: efficiency.efficiencyShade4}]}>{children}</Text>
+                <TouchableOpacity style={[styles.buttonOutlineNoShadow,{borderColor: colorVal, borderRadius: 10 },style]} onPress={onPress}>
+                    <Text style={[smallStyles.small_regular,centerText.center,styles.textSmall,{color: color},textStyle]}>{children}</Text>
                 </TouchableOpacity>            
             </View>
         )
     }
 
-    export function SCDesignSmall({onPress,buttonStyle={},textStyle={}, children }): React.JSX.Element {
+    export function SCDesignSmall({onPress,style,buttonStyle={},textStyle={}, children}: buttonTypeProps): React.JSX.Element {
         return (
             <View>
-                <TouchableOpacity style={[styles.buttonDesignSmall,buttonStyle]} onPress={onPress}>
+                <TouchableOpacity style={[styles.buttonDesignSmall,buttonStyle,style]} onPress={onPress}>
                     <Text style={[smallStyles.small_regular,centerText.center,styles.textSmall,textStyle]}>{children}</Text>
                 </TouchableOpacity>            
             </View>
         )
     }
-    export function SCTransFill({onPress, style={}, children }): React.JSX.Element {
+    export function SCTransFill({onPress,style,textStyle, children }: buttonTypeProps): React.JSX.Element {
         return (
             <View>
-                <TouchableOpacity style={[styles.buttonTrans,style,styles.transFill]} onPress={onPress}>
-                    <Text style={[smallStyles.small_regular,centerText.center,styles.textSmall,{color: efficiency.efficiencyTint1}]}>{children}</Text>
+                <TouchableOpacity style={[styles.buttonTrans,styles.transFill,style]} onPress={onPress}>
+                    <Text style={[smallStyles.small_regular,centerText.center,styles.textSmall,{color: efficiency.efficiencyTint1},textStyle]}>{children}</Text>
                 </TouchableOpacity>            
             </View>
         )
     }
-    export function SCTransOutline({onPress, children }): React.JSX.Element {
+    export function SCTransOutline({onPress,style,textStyle, children }: buttonTypeProps): React.JSX.Element {
         return (
             <View>
-                <TouchableOpacity style={[styles.buttonTrans,styles.transOutline]} onPress={onPress}>
-                    <Text style={[smallStyles.small_regular,centerText.center,styles.textSmall]}>{children}</Text>
+                <TouchableOpacity style={[styles.buttonTrans,styles.transOutline,style]} onPress={onPress}>
+                    <Text style={[smallStyles.small_regular,centerText.center,styles.textSmall,textStyle]}>{children}</Text>
                 </TouchableOpacity>            
             </View>
         )

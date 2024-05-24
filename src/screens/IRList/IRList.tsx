@@ -4,11 +4,11 @@ import { RootStackParamList } from "../../types/navTypes";
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { AbsNav,AbsHeader } from "../../components/absComp/Abs";
 import PageHeadInfo from "../../components/PageHeadInfo/PageHeadInfo";
-type ScreenProps = NativeStackScreenProps<RootStackParamList,'Ref'>
+type ScreenProps = NativeStackScreenProps<RootStackParamList,'IRList'>
 
 import styles from './style'
 
-export default function Ref ({navigation}: ScreenProps): React.JSX.Element{
+export default function IRList ({navigation}: ScreenProps): React.JSX.Element{
     function goToPending(){
         navigation.navigate('PendingDeliveries')
     }
@@ -39,7 +39,8 @@ export default function Ref ({navigation}: ScreenProps): React.JSX.Element{
             <AbsNav location="" goToHome={goToHome} goToNotifications={goToNotifications} goToSupport={goToSupport} goToRecords={goToBookingRecords} goToPending={goToPending}></AbsNav>
             
             <ScrollView>
-                <PageHeadInfo pageName={'Manage Riders'}/>         
+                <PageHeadInfo pageName={'Manage Riders'}/>
+                
             </ScrollView>
         </SafeAreaView>
     )
