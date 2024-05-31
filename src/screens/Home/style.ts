@@ -91,6 +91,7 @@ let styles = StyleSheet.create({
     itemTwoStackContainer: {
         flexDirection: 'row'
     },
+    
     item2Container: {
         flex: 1
     }

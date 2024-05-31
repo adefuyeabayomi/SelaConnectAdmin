@@ -71,7 +71,7 @@ export default function ManageBookings ({navigation}: ScreenProps): React.JSX.El
                         <AdminBookingItem assignRiders={assignRiders} goToBookingDetails={goToBookingDetails} details="Delivery of electronics to Mr Chuks" ></AdminBookingItem>
                     </View>                
                 </View>
-                
+
                 <View style={margins.mt50} />
                 <View style={margins.mt10} />
                 <View style={margins.mt50} />

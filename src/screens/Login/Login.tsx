@@ -11,21 +11,24 @@ import { SCButton } from "../../components/button/button";
 import { paddings } from "../../styles/spacing";
 
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+let envelope = <FontAwesome5 name="envelope" size={17} color={efficiency.efficiencyTint4} /> 
 import { Label1 } from "../../components/Label/Label";
 import SCInput from "../../components/input/input";
 import { layoutVals } from "../../styles/layout";
-let envelope = <FontAwesome5 name="envelope" size={17} color={efficiency.efficiencyTint4} /> 
 
 export default function Login ({navigation}: ScreenProps): React.JSX.Element{
     let [email,setEmail] = React.useState('')
     let [passCode1,setPassCode1] = React.useState('')
     let [passCode2,setPassCode2] = React.useState('')
+
     function validate(){
         return {state: 'default' as InputStateType, text: 'None'}
     }
+
     function goHome(){
         navigation.navigate('AppHome')
     }
+    
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <View style={[layoutVals.flex1,layoutVals.justifyCenter]}>                

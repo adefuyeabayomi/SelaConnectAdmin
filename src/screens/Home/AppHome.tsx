@@ -44,7 +44,7 @@ export default function AppHome ({navigation}: ScreenProps): React.JSX.Element{
         navigation.navigate('Notification')
     }
 
-    
+     
 
     function goToIRMain(){
         navigation.navigate('IRMain')

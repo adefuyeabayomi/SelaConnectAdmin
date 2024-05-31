@@ -43,16 +43,16 @@ export default function BookingRecordsList ({navigation}: ScreenProps): React.JS
             <ScrollView>
                 <PageHeadInfo pageName={'Booking Records List'}/>
                 <View style={paddings.p10}>
-                    <HistoryItem title="Delivery of electronict to Mr Chucks" actionFn={()=>{}}></HistoryItem>
+                    <HistoryItem title="Delivery of electronics to Mr Chucks" actionFn={()=>{}}></HistoryItem>
                 </View>
                 <View style={paddings.p10}>
-                    <HistoryItem title="Delivery of electronict to Mr Chucks" actionFn={()=>{}}></HistoryItem>
+                    <HistoryItem title="Delivery of electronics to Mr Chucks" actionFn={()=>{}}></HistoryItem>
                 </View>
                 <View style={paddings.p10}>
-                    <HistoryItem title="Delivery of electronict to Mr Chucks" actionFn={()=>{}}></HistoryItem>
+                    <HistoryItem title="Delivery of electronics to Mr Chucks" actionFn={()=>{}}></HistoryItem>
                 </View>
                 <View style={paddings.p10}>
-                    <HistoryItem title="Delivery of electronict to Mr Chucks" actionFn={()=>{}}></HistoryItem>
+                    <HistoryItem title="Delivery of electronics to Mr Chucks" actionFn={()=>{}}></HistoryItem>
                 </View>
 
                 <View style={margins.mt50} />
