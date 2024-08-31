@@ -1,15 +1,8 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from "react-native";
 let styles = StyleSheet.create({
-    safeAreaView: {
-        flex: 1
-    }
-})
+  safeAreaView: {
+    flex: 1,
+  },
+});
 
-export default styles
-
-
-
-
-
-
-
+export default styles;

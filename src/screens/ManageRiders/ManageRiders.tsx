@@ -1,80 +1,111 @@
-import React from "react";
-import { SafeAreaView,ScrollView,View } from 'react-native'
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, ScrollView, View } from "react-native";
 import { RootStackParamList } from "../../types/navTypes";
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-type ScreenProps = NativeStackScreenProps<RootStackParamList,'ManageRiders'>
-import { AbsNav,AbsHeader } from "../../components/absComp/Abs";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+type ScreenProps = NativeStackScreenProps<RootStackParamList, "ManageRiders">;
+import { AbsNav, AbsHeader } from "../../components/absComp/Abs";
 import PageHeadInfo from "../../components/PageHeadInfo/PageHeadInfo";
-import styles from './style'
+import styles from "./style";
 import { margins, paddings } from "../../styles/spacing";
 import { InfoStatic } from "../../components/StaticInformation/StaticInfo";
 import { RidersItemComponent } from "../../components/Items/item";
 import { SCButton } from "../../components/button/button";
+import authService, { User } from "../../functions/services/authService";
+import moment from "moment";
 
-export default function ManageRiders ({navigation}: ScreenProps): React.JSX.Element{
-    function goToPending(){
-        navigation.navigate('PendingDeliveries')
-    }
+export default function ManageRiders({
+  navigation,
+}: ScreenProps): React.JSX.Element {
+  let [riders, setRiders] = useState<User[]>([]);
 
-    function goToBookingRecords(){
-        navigation.navigate('BookingRecords')
-    }
+  function goToPending() {
+    navigation.navigate("PendingDeliveries");
+  }
 
-    function goToSupport(){
-        navigation.navigate('ChatList')
-    }
+  function goToBookingRecords() {
+    navigation.navigate("BookingRecords");
+  }
 
-    function goToHome(){
-        navigation.navigate('AppHome')
-    }
+  function goToSupport() {
+    navigation.navigate("ChatList");
+  }
 
-    function goToNotifications(){
-        navigation.navigate('Notification')
-    }
-    function goBack(){
-        navigation.goBack()
-    }
+  function goToHome() {
+    navigation.navigate("AppHome");
+  }
 
-    function goToRiderDetails(){
-        navigation.navigate('RiderDetails')
-    }
+  function goToNotifications() {
+    navigation.navigate("Notification");
+  }
+  function goBack() {
+    navigation.goBack();
+  }
 
-    function goToRegisterRider(){
-        navigation.navigate('RiderRegistration')
-    }
+  function goToRiderDetails(id: string) {
+    navigation.navigate("RiderDetails", { id });
+  }
 
-    return (
-        <SafeAreaView style={styles.safeAreaView}>
-           
-            <AbsHeader backFn={goBack} headerVal={'Manage Riders'} />
-            <AbsNav location="" goToHome={goToHome} goToNotifications={goToNotifications} goToSupport={goToSupport} goToRecords={goToBookingRecords} goToPending={goToPending}></AbsNav>
-            
-            <ScrollView>
-                <PageHeadInfo pageName={'Manage Riders'}/>
-                <View style={paddings.p10}>
-                    <InfoStatic>No Riders Registered Yet</InfoStatic>
+  function goToRegisterRider() {
+    navigation.navigate("RiderRegistration");
+  }
+
+  useEffect(() => {
+    authService
+      .getAccounts(1, 30, false, false, "rider")
+      .then((res) => {
+        console.log({ res });
+        setRiders(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  return (
+    <SafeAreaView style={styles.safeAreaView}>
+      <AbsHeader backFn={goBack} headerVal={"Manage Riders"} />
+      <AbsNav
+        location=""
+        goToHome={goToHome}
+        goToNotifications={goToNotifications}
+        goToSupport={goToSupport}
+        goToRecords={goToBookingRecords}
+        goToPending={goToPending}
+      ></AbsNav>
+
+      <ScrollView>
+        <PageHeadInfo pageName={"Manage Riders"} />
+        {riders.length == 0 ? (
+          <View style={paddings.p10}>
+            <InfoStatic>No Approved Riders Yet.</InfoStatic>
+          </View>
+        ) : (
+          <View style={[paddings.ph10, paddings.pt15]}>
+            {riders.map((x, index) => {
+              return (
+                <View key={index} style={margins.mv10}>
+                  <RidersItemComponent
+                    actionFn={() => {
+                      goToRiderDetails(x._id as string);
+                    }}
+                    name={x.email}
+                    employmentHistory={`Employed since ${moment(x.created).format("MMM Do YYYY")} - Present`}
+                    buttonText="View Details"
+                  />
                 </View>
-                <View style={paddings.ph10}>
-                    <View style={margins.mv10}>
-                        <RidersItemComponent actionFn={goToRiderDetails} name="Adelaide Emmanuel" employmentHistory="Employed since May 12 2024 - Present" />
-                    </View>
-                    <View style={margins.mv10}>
-                        <RidersItemComponent actionFn={goToRiderDetails} name="Adelaide Emmanuel" employmentHistory="Employed since May 12 2024 - Present" />
-                    </View>
-                    <View style={margins.mv10}>
-                        <RidersItemComponent actionFn={goToRiderDetails} name="Adelaide Emmanuel" employmentHistory="Employed since May 12 2024 - Present" />
-                    </View>
-                    <View style={margins.mv20}>
-                        <SCButton onPress={goToRegisterRider}>Register New Rider</SCButton>
-                    </View>
-                    
-                </View>
-                <View style={margins.mt50} />
-                <View style={margins.mt10} />
-                <View style={margins.mt50} />
-            </ScrollView>
-        </SafeAreaView>
-    )
+              );
+            })}
+            <View style={margins.mv20}>
+              <SCButton onPress={goToRegisterRider}>
+                Approve Pending Rider Accounts
+              </SCButton>
+            </View>
+          </View>
+        )}
+        <View style={margins.mt50} />
+        <View style={margins.mt10} />
+        <View style={margins.mt50} />
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
-
-

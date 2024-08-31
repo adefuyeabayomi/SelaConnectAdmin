@@ -1,5 +1,11 @@
-import * as React from "react"
-import Svg, { Circle, Path, Defs, LinearGradient, Stop } from "react-native-svg"
+import * as React from "react";
+import Svg, {
+  Circle,
+  Path,
+  Defs,
+  LinearGradient,
+  Stop,
+} from "react-native-svg";
 const SplashLogo = (props) => (
   <Svg xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
     <Circle cx={75} cy={75} r={75} fill="#fff" />
@@ -126,5 +132,5 @@ const SplashLogo = (props) => (
       </LinearGradient>
     </Defs>
   </Svg>
-)
-export default SplashLogo
+);
+export default SplashLogo;
