@@ -258,7 +258,6 @@ interface HistoryItemPropType {
   actionFn: () => void;
 }
 
-
 export function HistoryItem({
   title,
   actionFn,
@@ -292,7 +291,7 @@ export function HistoryItem({
         </View>
         <View style={[layoutVals.flex0, boxWidth.w10]} />
         <View style={layoutVals.flex1}>
-          <SCTransOutline onPress={()=>{}}>Download Reciept</SCTransOutline>
+          <SCTransOutline onPress={() => {}}>Download Reciept</SCTransOutline>
         </View>
       </View>
     </View>

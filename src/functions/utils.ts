@@ -185,3 +185,18 @@ export const isToday = (dateString: string): boolean => {
 
   return givenDate.getTime() === currentDate.getTime();
 };
+
+export const getDeliveryStep = (status: string): number => {
+  switch (status) {
+    case "pending":
+      return 0; // Going To Pickup Package
+    case "started":
+      return 1; // Package Collected
+    case "picked":
+      return 2; // Approaching Dropoff
+    case "dropped":
+      return 3; // Package Delivered
+    default:
+      return -1; // Invalid or unknown status
+  }
+};

@@ -54,6 +54,7 @@ export default function Notification({
           <View style={paddings.p10}>
             <InfoStatic>You do not yet have any Notifications.</InfoStatic>
           </View>
+          {/**             
           <View style={paddings.p10}>
             <NotificationItem
               type={"bookingSuccess"}
@@ -62,22 +63,7 @@ export default function Notification({
               }
             />
           </View>
-          <View style={paddings.p10}>
-            <NotificationItem
-              type={"bookingSuccess"}
-              text={
-                "Booking Successful. Booking saved as “Delivery of electronics to Aleliaide Kemi. ID : XXI32874HF8HF8943H34T"
-              }
-            />
-          </View>
-          <View style={paddings.p10}>
-            <NotificationItem
-              type={"bookingSuccess"}
-              text={
-                "Booking Successful. Booking saved as “Delivery of electronics to Aleliaide Kemi. ID : XXI32874HF8HF8943H34T"
-              }
-            />
-          </View>
+             */}
         </View>
 
         <View style={margins.mt50} />

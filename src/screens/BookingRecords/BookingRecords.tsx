@@ -10,13 +10,18 @@ import { paddings, margins } from "../../styles/spacing";
 import { h5Styles, centerText, paraStyles } from "../../styles/textstyles";
 import { efficiency } from "../../styles/colordef";
 import styles from "./style";
-import deliveryOrder, { DeliveryByDay } from "../../functions/services/deliveryOrder";
+import deliveryOrder, {
+  DeliveryByDay,
+} from "../../functions/services/deliveryOrder";
 import { isToday, sortDeliveriesByDay } from "../../functions/utils";
 import InputGrouping from "../../components/InputGrouping/InputGrouping";
 import moment from "moment";
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-import { SCButton, SCButtonOutlineColorVary } from "../../components/button/button";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
+import {
+  SCButton,
+  SCButtonOutlineColorVary,
+} from "../../components/button/button";
 import { layoutVals } from "../../styles/layout";
 import { boxWidth } from "../../styles/width";
 import { InfoStatic } from "../../components/StaticInformation/StaticInfo";
@@ -29,11 +34,11 @@ export default function BookingRecords({
   //date pick config
   const [date, setDate] = useState(new Date());
   const [date2, setdate2] = useState(new Date());
-  const [dateF, setDateF] = useState('No date selected');
-  const [dateF2, setdateF2] = useState('No Time selected');
+  const [dateF, setDateF] = useState("No date selected");
+  const [dateF2, setdateF2] = useState("No Time selected");
   const [showDate, setShowDate] = useState(false);
   const [showDate2, setShowDate2] = useState(false);
-  
+
   const onChangeDate = (
     event: DateTimePickerEvent,
     selectedDate: Date | undefined,
@@ -43,7 +48,7 @@ export default function BookingRecords({
     if (currentDate) {
       setShowDate(false);
       setDate(currentDate);
-      let dateF = moment(selectedDate).format('ll');
+      let dateF = moment(selectedDate).format("ll");
       setDateF(dateF);
       console.log({ selectedDate });
     }
@@ -53,7 +58,7 @@ export default function BookingRecords({
     if (currentTime) {
       setShowDate2(false);
       setdate2(currentTime);
-      let dateF2 = moment(Time).format('ll');
+      let dateF2 = moment(Time).format("ll");
       setdateF2(dateF2);
       console.log({ Time });
     }
@@ -66,7 +71,6 @@ export default function BookingRecords({
   const showDate2F = () => {
     setShowDate2(true);
   };
-
 
   function goToPending() {
     navigation.navigate("PendingDeliveries");
@@ -91,7 +95,7 @@ export default function BookingRecords({
     navigation.goBack();
   }
   function goToBookinsRecordsList(ids: string[], date: string) {
-    navigation.navigate("BookingRecordsList",{ids,date});
+    navigation.navigate("BookingRecordsList", { ids, date });
   }
 
   useEffect(() => {
@@ -120,10 +124,10 @@ export default function BookingRecords({
 
       <ScrollView>
         <PageHeadInfo pageName={"Booking Records"} />
-        
+
         <View style={[styles.dataContainer, styles.secContainer]}>
           <View>
-            <InputGrouping headText={'Records Time Range'}>
+            <InputGrouping headText={"Records Time Range"}>
               <View>
                 <View>
                   {showDate && (
@@ -148,7 +152,7 @@ export default function BookingRecords({
                   )}
                 </View>
               </View>
-              
+
               <View>
                 <View style={[layoutVals.flexRow, paddings.pv10]}>
                   <View style={layoutVals.flex0}>
@@ -158,7 +162,7 @@ export default function BookingRecords({
                         { color: efficiency.efficiencyMain },
                       ]}
                     >
-                      From:{' '}
+                      From:{" "}
                     </Text>
                   </View>
                   <View style={layoutVals.flex1}></View>
@@ -181,7 +185,7 @@ export default function BookingRecords({
                         { color: efficiency.efficiencyMain },
                       ]}
                     >
-                      To:{' '}
+                      To:{" "}
                     </Text>
                   </View>
                   <View style={layoutVals.flex1}></View>
@@ -224,7 +228,6 @@ export default function BookingRecords({
               </View>
             </InputGrouping>
           </View>
-
         </View>
         {pendingInfo.length == 0 ? (
           <View style={[paddings.p10, margins.mt10]}>
@@ -244,7 +247,10 @@ export default function BookingRecords({
                         detailsText={`There are ${x.total} deliveries today`}
                         buttonText="View Deliveries"
                         actionFn={() => {
-                          goToBookinsRecordsList(x.deliveryIds, moment(x.date).format("MMM Do YYYY"))
+                          goToBookinsRecordsList(
+                            x.deliveryIds,
+                            moment(x.date).format("MMM Do YYYY"),
+                          );
                         }}
                         date="Today"
                         amount={x.total as number}
@@ -263,7 +269,10 @@ export default function BookingRecords({
                     detailsText={`There was ${x.total} fulfilled deliveries on ${moment(x.date).format("MMM Do YYYY")}`}
                     buttonText="View Deliveries"
                     actionFn={() => {
-                      goToBookinsRecordsList(x.deliveryIds, moment(x.date).format("MMM Do YYYY"))
+                      goToBookinsRecordsList(
+                        x.deliveryIds,
+                        moment(x.date).format("MMM Do YYYY"),
+                      );
                     }}
                     date={moment(x.date).format("MMM Do YYYY")}
                     amount={x.total}

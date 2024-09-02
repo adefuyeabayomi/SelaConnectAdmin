@@ -124,22 +124,6 @@ const getDeliveryOrders = async (
   }
 };
 
-const getDeliveryOrdersWithIds = async (
-  ids: string[],
-): Promise<DeliveryOrder[]> => {
-  try {
-    // Make a POST request to the /orders-by-ids endpoint
-    const response = await axiosInstance.post(`delivery-orders/orders-by-ids`, {
-      ids,
-    });
-    // Return the response data
-    return response.data as DeliveryOrder[];
-  } catch (error: any) {
-    // Handle errors (e.g., logging or throwing)
-    throw new Error(`Error fetching orders by IDs: ${error.message}`);
-  }
-};
-
 const getDeliveryOrderById = async (orderId: string) => {
   try {
     const response = await axiosInstance.get(`/delivery-orders/${orderId}`);
@@ -165,7 +149,8 @@ const calculateDeliveryCost = async (deliveryDetails: {
   }
 };
 const getSortedDeliveryOrders = async (
-  deliveryTrackStatus: "pending" | "dropped",
+  deliveryTrackStatus: "pending" | "dropped" | "intransit",
+  rider = "",
 ): Promise<SortedResponse> => {
   try {
     const response = await axiosInstance.get<SortedResponse>(
@@ -173,6 +158,7 @@ const getSortedDeliveryOrders = async (
       {
         params: {
           deliveryTrackStatus,
+          rider,
         },
       },
     );
@@ -181,7 +167,21 @@ const getSortedDeliveryOrders = async (
     throw error;
   }
 };
-
+const getDeliveryOrdersWithIds = async (
+  ids: string[],
+): Promise<DeliveryOrder[]> => {
+  try {
+    // Make a POST request to the /orders-by-ids endpoint
+    const response = await axiosInstance.post(`delivery-orders/orders-by-ids`, {
+      ids,
+    });
+    // Return the response data
+    return response.data as DeliveryOrder[];
+  } catch (error: any) {
+    // Handle errors (e.g., logging or throwing)
+    throw new Error(`Error fetching orders by IDs: ${error.message}`);
+  }
+};
 export default {
   createDeliveryOrder,
   updateDeliveryOrder,

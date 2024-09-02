@@ -12,10 +12,13 @@ type ScreenProps = NativeStackScreenProps<
 import styles from "./style";
 import { paddings, margins } from "../../styles/spacing";
 import { HistoryItem } from "../../components/Items/item";
-import deliveryOrder, { DeliveryOrder } from "../../functions/services/deliveryOrder";
+import deliveryOrder, {
+  DeliveryOrder,
+} from "../../functions/services/deliveryOrder";
 
 export default function BookingRecordsList({
-  navigation, route
+  navigation,
+  route,
 }: ScreenProps): React.JSX.Element {
   let { ids, date } = route.params;
   let [orders, setOrders] = useState<DeliveryOrder[]>();
@@ -56,7 +59,7 @@ export default function BookingRecordsList({
   function goToBookingDetails(id: string) {
     navigation.navigate("BookingDetails", { id });
   }
-   
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <AbsHeader backFn={goBack} headerVal={"Booking Records List"} />
@@ -72,17 +75,19 @@ export default function BookingRecordsList({
       <ScrollView>
         <PageHeadInfo pageName={"Booking Records List"} />
         {orders?.map((x, index) => {
-            return (
-              <View key={index} style={paddings.p10}>
-                <View style={paddings.p10}>
-                  <HistoryItem
-                    title={`Delivery of ${x.packageDescription} from ${x.pickupArea} to ${x.dropoffArea}- Sender ${x.senderName}, N ${x.price}`}
-                    actionFn={() => {goToBookingDetails(x._id as string);}}
-                  ></HistoryItem>
-                </View>
+          return (
+            <View key={index} style={paddings.p10}>
+              <View style={paddings.p10}>
+                <HistoryItem
+                  title={`Delivery of ${x.packageDescription} from ${x.pickupArea} to ${x.dropoffArea}- Sender ${x.senderName}, N ${x.price}`}
+                  actionFn={() => {
+                    goToBookingDetails(x._id as string);
+                  }}
+                ></HistoryItem>
               </View>
-            );
-          })}
+            </View>
+          );
+        })}
         <View style={margins.mt50} />
         <View style={margins.mt10} />
         <View style={margins.mt50} />

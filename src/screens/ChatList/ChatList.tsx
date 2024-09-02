@@ -8,6 +8,7 @@ type ScreenProps = NativeStackScreenProps<RootStackParamList, "ChatList">;
 import { margins, paddings } from "../../styles/spacing";
 import styles from "./style";
 import { ChatMsgOverview } from "../../components/Items/item";
+import { InfoStatic } from "../../components/StaticInformation/StaticInfo";
 
 export default function ChatList({
   navigation,
@@ -52,7 +53,12 @@ export default function ChatList({
 
       <ScrollView>
         <PageHeadInfo pageName={"Feedback & Complaints"} />
-        <View style={margins.mt20} />
+        <View />
+        <View style={paddings.p10}>
+          <InfoStatic>You do not yet have Messages.</InfoStatic>
+        </View>
+        {/**
+             
         <View style={paddings.p10}>
           <ChatMsgOverview
             actionFn={goToChatPage}
@@ -67,55 +73,7 @@ export default function ChatList({
             message="I want to play a game. I want to play a game.I want to play a game."
           />
         </View>
-        <View style={paddings.p10}>
-          <ChatMsgOverview
-            actionFn={goToChatPage}
-            name="Ololademi Asake"
-            message="I want to play a game."
-          />
-        </View>
-        <View style={paddings.p10}>
-          <ChatMsgOverview
-            actionFn={goToChatPage}
-            name="Ololademi Asake"
-            message="I want to play a game.I want to play a game.I want to play a game.I want to play a game."
-          />
-        </View>
-        <View style={paddings.p10}>
-          <ChatMsgOverview
-            actionFn={goToChatPage}
-            name="Ololademi Asake"
-            message="I want to play a game. I want to play a game.I want to play a game."
-          />
-        </View>
-        <View style={paddings.p10}>
-          <ChatMsgOverview
-            actionFn={goToChatPage}
-            name="Ololademi Asake"
-            message="I want to play a game."
-          />
-        </View>
-        <View style={paddings.p10}>
-          <ChatMsgOverview
-            actionFn={goToChatPage}
-            name="Ololademi Asake"
-            message="I want to play a game.I want to play a game.I want to play a game.I want to play a game."
-          />
-        </View>
-        <View style={paddings.p10}>
-          <ChatMsgOverview
-            actionFn={goToChatPage}
-            name="Ololademi Asake"
-            message="I want to play a game. I want to play a game.I want to play a game."
-          />
-        </View>
-        <View style={paddings.p10}>
-          <ChatMsgOverview
-            actionFn={goToChatPage}
-            name="Ololademi Asake"
-            message="I want to play a game."
-          />
-        </View>
+             */}
 
         <View style={margins.mt50} />
         <View style={margins.mt50} />

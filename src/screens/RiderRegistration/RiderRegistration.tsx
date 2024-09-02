@@ -24,7 +24,7 @@ export default function RiderRegistration({
   navigation,
 }: ScreenProps): React.JSX.Element {
   let [name, setName] = useState("");
-  let {setLoading,setLoadingText} = useLoading()
+  let { setLoading, setLoadingText } = useLoading();
   let auth = useAuth();
 
   let [riders, setRiders] = useState<User[]>([]);
@@ -61,12 +61,20 @@ export default function RiderRegistration({
 
   function approveRiderAccount(accountId: string) {
     setLoading(true);
-    authService.updateUserDetails(auth.accessToken, {
-      disabled: false,
-      accountId,
-    }).then(res=>{
-      console.log({approveRes: res})
-    }).catch(err=>{console.log(err)}).finally(()=>{setLoading(false)})
+    authService
+      .updateUserDetails(auth.accessToken, {
+        disabled: false,
+        accountId,
+      })
+      .then((res) => {
+        console.log({ approveRes: res });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   useEffect(() => {
